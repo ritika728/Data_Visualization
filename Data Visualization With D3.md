@@ -26,6 +26,9 @@ d3.select("body")
       .append("h1")
       .text("Learning D3")
 ```
+- The d3 part of the example is a reference to the D3 object, which is how you access D3 methods
+- D3 allows you to chain several methods together with periods to perform a number of actions in a row.
+
 
 ### SELECT A GROUP OF ELEMENTS WITH D3
 - D3 also has the selectAll() method to select a group of elements. 
@@ -69,6 +72,7 @@ d3.select("body")
 ```
 .text((d)=>d + ' USD')
 ```
+- In the example above, the parameter d refers to a single entry in the dataset that a selection is bound to
 
 ### ADDING INLINE STYLING TO ELEMENTS
 - The style() method takes a comma-separated key-value pair as an argument. 
@@ -77,4 +81,57 @@ d3.select("body")
 .style("font-family","verdana")
 ```
 
-### 
+### CHANGE STYLE BASED ON DATA
+-  you may want to color a data point blue if it has a value less than 20, and red otherwise. 
+-  You can use a callback function in the style() method and include the conditional logic. 
+-  The callback function uses the d parameter to represent the data point
+```
+selection.style("color", (d) => {
+
+});
+```
+```
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+    d3.select("body").selectAll("h2")
+      .data(dataset)
+      .enter()
+      .append("h2")
+      .text((d) => (d + " USD"))
+      // Add your code below this line
+      .style("color", (d) => {
+        if(d < 20){
+          return "red"
+        }
+        else{
+          return "green"
+        }
+      })
+  </script>
+</body>
+```
+
+### ADD CLASSES WITH D3
+- D3 has the attr() method to add any HTML attribute to an element, including a class name.
+- The attr() method works the same way that style() does.
+- It takes comma-separated values, and can use a callback function. 
+- Here's an example to add a class of container to a selection:
+```
+selection.attr("class", "container");
+```
+- the class parameter will remain the same whenever you need to add a class and only the container parameter will change.
+
+### UPDATE THE HEIGHT OF AN ELEMENT DYNAMICALLY
+```
+selection.style("cssProperty", (d) => d)
+```
+- EG.
+```
+.style('height', d => `${d}px`)
+```
+- style() method to the code in the editor to set the height property for each element. 
+- Using a callback function to return the value of the data point with the string px added to it.
+
+### SVG IN D3
+
